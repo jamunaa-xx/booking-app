@@ -1,25 +1,27 @@
 import Home from "./pages/home/Home";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Login from "./pages/login/Login";
 import New from "./pages/new/New";
 import Single from "./pages/single/Single";
 import List from "./pages/list/List";
-import { productInputs, userInputs } from "./formsource";
+import { userInputs } from "./formsource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 import { hotelColumns, roomColumns, userColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
+import NewRoom from "./pages/newRoom/NewRoom";
 
 function App() {
   const {darkMode} = useContext(DarkModeContext);
 
   const ProtectedRoute = ({children}) =>{
     const {user} = useContext(AuthContext);
+    const navigate = useNavigate("/login")
 
     if(!user) {
-      return <Navigate to="/login" />;
+      return navigate;
     }
 
     return children;
@@ -91,7 +93,7 @@ function App() {
                 }
               />
             </Route>
-            {/* <Route path="rooms">
+            <Route path="rooms">
               <Route 
                 index element={
                   <ProtectedRoute>
@@ -111,11 +113,11 @@ function App() {
                 path="new" 
                 element={
                   <ProtectedRoute>
-                    <New inputs={roomInputs} title="Add New Room" />
+                    <NewRoom />
                   </ProtectedRoute>
                 }
               />
-            </Route> */}
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

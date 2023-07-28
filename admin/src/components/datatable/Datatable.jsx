@@ -2,9 +2,9 @@ import { Link, useLocation } from "react-router-dom";
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
-import useFetch from "../../hooks/useFetch";
 import axios from "axios";
-
+import useFetch from "../../hooks/useFetch";
+import Pop from "../pop/Pop";
 
 const Datatable = ({cols}) => {
 
@@ -19,8 +19,13 @@ const Datatable = ({cols}) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/${path}/${id}`);
-      setList(list.filter((item)=>item._id !== id));
+      if(path==="rooms") {
+        <Pop/>
+      } 
+      else {
+        await axios.delete(`/${path}/${id}`);
+        setList(list.filter((item)=>item._id !== id));
+      }
     } catch(err) {}
   };
 
@@ -35,7 +40,12 @@ const Datatable = ({cols}) => {
             <Link to={"/users/test"} style={{textDecoration:"none"}}>
               <div className="viewButton">View</div>
             </Link>
-            <div className="deleteButton" onClick={()=>handleDelete(params.row._id)}>Delete</div>
+            <div 
+              className="deleteButton" 
+              onClick={()=>handleDelete(params.row._id)}
+            >
+              Delete
+            </div>
           </div>
         );
       },

@@ -22,11 +22,11 @@ const connect = async ()=> {
 
 mongoose.connection.on("disconnected", ()=>{
   console.log("mongoDB disconnected")
-})
+});
 
 mongoose.connection.on("connected", ()=>{
   console.log("mongoDB connected")
-})
+});
 
 //middlewares
 app.use(cors())
@@ -46,8 +46,8 @@ app.use((err,req,res,next)=>{
     status: errorStatus,
     message: errorMessage,
     stack: err.stack,
-  })
-})
+  });
+});
 
 app.listen(1471, () => {
   connect()

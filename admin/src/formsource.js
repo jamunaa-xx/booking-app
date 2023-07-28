@@ -36,38 +36,38 @@ export const userInputs = [
   },
 ];
 
-export const productInputs = [
-  {
-    id: 1,
-    label: "Title",
-    type: "text",
-    placeholder: "Apple Macbook Pro",
-  },
-  {
-    id: 2,
-    label: "Description",
-    type: "text",
-    placeholder: "Description",
-  },
-  {
-    id: 3,
-    label: "Category",
-    type: "text",
-    placeholder: "Computers",
-  },
-  {
-    id: 4,
-    label: "Price",
-    type: "text",
-    placeholder: "100",
-  },
-  {
-    id: 5,
-    label: "Stock",
-    type: "text",
-    placeholder: "in stock",
-  },
-];
+// export const productInputs = [
+//   {
+//     id: 1,
+//     label: "Title",
+//     type: "text",
+//     placeholder: "Apple Macbook Pro",
+//   },
+//   {
+//     id: 2,
+//     label: "Description",
+//     type: "text",
+//     placeholder: "Description",
+//   },
+//   {
+//     id: 3,
+//     label: "Category",
+//     type: "text",
+//     placeholder: "Computers",
+//   },
+//   {
+//     id: 4,
+//     label: "Price",
+//     type: "text",
+//     placeholder: "100",
+//   },
+//   {
+//     id: 5,
+//     label: "Stock",
+//     type: "text",
+//     placeholder: "in stock",
+//   },
+// ];
 
 export const hotelInputs = [
   {
@@ -83,6 +83,12 @@ export const hotelInputs = [
     placeholder: "hotel",
   },
   {
+    id: "title",
+    label: "Title",
+    type: "text",
+    placeholder: "The best Hotel",
+  },
+  {
     id: "city",
     label: "City",
     type: "text",
@@ -92,19 +98,13 @@ export const hotelInputs = [
     id: "address",
     label: "Address",
     type: "text",
-    placeholder: "216, Elton St",
+    placeholder: "2-1-46/78, MG Road",
   },
   {
     id: "distance",
     label: "Distance from City Center",
     type: "text",
     placeholder: "500m",
-  },
-  {
-    id: "title",
-    label: "Title",
-    type: "text",
-    placeholder: "The best Hotel",
   },
   {
     id: "desc",

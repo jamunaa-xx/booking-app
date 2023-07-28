@@ -116,10 +116,10 @@ const NewHotel = () => {
                 <select id="rooms" multiple onChange={handleSelect}>
                   {loading 
                     ? "loading" 
-                    : data?.map((room)=>(
-                    <option key={room._id} value={room._id}>
-                      {room.title}
-                    </option>
+                    : data && data.map((room)=>(
+                      <option key={room._id} value={room._id}>
+                        {room.title}
+                      </option>
                     ))
                   }
                 </select>

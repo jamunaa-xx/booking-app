@@ -3,51 +3,76 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import { roomInputs } from "../../formsource";
+import axios from "axios";
 
-const NewRoom = ({inputs, title}) => {
+const NewRoom = () => {
+  const [info, setInfo] = useState({});
+  const [hotelId, setHotelId] = useState(undefined);
+  const [rooms, setRooms] = useState([]);
 
-  const [file,setFile] = useState("");
+  const { data, loading, error } = useFetch("/hotels");
+
+  const handleChange = (e) => {
+    setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    const roomNumbers = rooms.split(",").map((room)=> ({ number: room }));
+    try {
+      await axios.post(`/rooms/${hotelId}`, {...info, roomNumbers})
+    } catch (err) {
+      console.log(err);
+    }
+
+  }
+
   return (
     <div className="new">
       <Sidebar/>
       <div className="newContainer">
         <Navbar/>
         <div className="top">
-          <h1>{title}</h1>
+          <h1>Add New Room</h1>
         </div>
         <div className="bottom">
-          <div className="left">
-            <img 
-              src={
-                file
-                  ? URL.createObjectURL(file) 
-                  : "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
-              }
-              alt="" 
-            />
-          </div>
           <div className="right">
             <form>
-              <div className="formInput">
-                <label htmlFor="file">
-                  <DriveFolderUploadOutlinedIcon className="icon"/>
+              {roomInputs.map((input)=>(
+                <div className="formInput" key={input.id} >
+                  <label>{input.label} </label>
                   <input 
-                    type="file" 
-                    onChange={(e) => setFile(e.target.files[0])} 
-                    id="file"
+                    id={input.id} 
+                    type={input.type} 
+                    placeholder={input.placeholder} 
+                    onChange={handleChange}
                   />
-                </label>
+                </div>
+              ))}
+              <div className="formInput">
+                <label>Room Numbers </label>
+                <textarea 
+                  placeholder="Give comma between each room number"
+                  onChange={(e)=>setRooms(e.target.value)}
+                />
               </div>
-              
-
-                {inputs.map(input=>(
-                  <div className="formInput" key={input.id} >
-                    <label>{input.label} </label>
-                    <input type={input.type} placeholder={input.placeholder} />
-                  </div>
-                ))}
-              
-              <button>Submit</button>
+              <div className="formInput">
+                <label>Choose a Hotel </label>
+                <select 
+                  id="hotelId" 
+                  onChange={(e) => setHotelId(e.target.value)}
+                >
+                  {loading 
+                    ? "loading" 
+                    : data && data.map(hotel=>(
+                      <option key={hotel._id} value={hotel._id}>{hotel.name}</option>
+                    ))
+                  }
+                </select>
+              </div>      
+              <button onClick={handleClick}>Submit</button>
             </form>
           </div>
         </div>

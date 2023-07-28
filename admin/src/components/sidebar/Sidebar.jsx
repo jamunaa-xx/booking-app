@@ -42,12 +42,12 @@ const Sidebar = () => {
               <span>Hotels</span>
             </li>
           </Link>
-          <li>
-            <Link to="/rooms" style={{textDecoration:"none"}}>
+          <Link to="/rooms" style={{textDecoration:"none"}}>
+            <li>
               <BedOutlinedIcon className="icon" />
               <span>Rooms</span>
-            </Link>
-          </li>
+            </li>
+          </Link>
           <li>
             <LocalShippingIcon className="icon" />
             <span>Delivery</span>
@@ -79,10 +79,13 @@ const Sidebar = () => {
             <AccountCircleIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
-            <LogoutIcon className="icon" />
-            <span>Log Out</span>
-          </li>
+          <Link to ="/login">
+            <li>
+              <LogoutIcon className="icon" />
+              <span>Log Out</span>
+            </li>
+          </Link>
+          
         </ul>
       </div>
       <div className="bottom"></div>
